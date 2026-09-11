@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ultimate Guide to Memecoins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#07080a;
+    --charcoal:#111411;
+    --panel:#161a17;
+    --emerald-deep:#0d2f24;
+    --emerald:#1f5f45;
+    --sage:#6fae86;
+    --gold:#cba158;
+    --gold-soft:#e7cd94;
+    --ink:#eceee9;
+    --ink-dim:#9aa39a;
+    --ink-faint:#5e685f;
+    --line:#242a24;
+    --radius-sm: 3px;
+    --radius-md: 8px;
+    --maxw: 1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--black);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold); color:var(--black);}
+
+  h1,h2,h3,h4, .display{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    line-height:1.08;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 40px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- background texture ---------- */
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:1;
+    opacity:0.035; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(7,8,10,0.72);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    transition:background 0.3s ease;
+  }
+  nav{
+    max-width:var(--maxw); margin:0 auto; padding:0 40px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600; font-size:19px;
+    display:flex; align-items:baseline; gap:2px;
+    letter-spacing:-0.01em;
+  }
+  .logo .dot{color:var(--sage); font-size:22px; line-height:0;}
+  .navlinks{display:flex; gap:36px; font-size:14px; color:var(--ink-dim);}
+  .navlinks a{transition:color 0.2s ease; position:relative;}
+  .navlinks a:hover{color:var(--ink);}
+  .nav-cta{
+    font-size:13px; font-weight:500; letter-spacing:0.02em;
+    padding:11px 22px; border:1px solid var(--gold);
+    border-radius:2px; color:var(--gold-soft);
+    transition:all 0.25s ease; white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--gold); color:var(--black);}
+  .navmenu-btn{display:none;}
+
+  @media(max-width:860px){
+    .navlinks{display:none;}
+    nav{padding:0 24px;}
+  }
+
+  /* ---------- buttons ---------- */
+  .btn-primary{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--gold-soft);
+    color:var(--black);
+    font-weight:600; font-size:15px;
+    padding:17px 30px;
+    border-radius:2px;
+    transition:transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    box-shadow:0 0 0 rgba(203,161,88,0);
+  }
+  .btn-primary:hover{
+    background:var(--gold);
+    transform:translateY(-2px);
+    box-shadow:0 14px 30px -10px rgba(203,161,88,0.4);
+  }
+  .btn-ghost{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--ink-dim); font-size:14px; font-weight:500;
+    padding:17px 4px;
+    border-bottom:1px solid transparent;
+    transition:color 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-ghost:hover{color:var(--ink); border-color:var(--ink-faint);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding-top:76px;
+    position:relative;
+    background:
+      radial-gradient(ellipse 900px 600px at 78% 18%, rgba(31,95,69,0.28), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 5% 90%, rgba(203,161,88,0.06), transparent 60%),
+      var(--black);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr 0.95fr;
+    gap:40px; align-items:center;
+    width:100%;
+  }
+  .eyebrow{
+    font-size:12.5px; font-weight:600; letter-spacing:0.14em;
+    color:var(--sage); text-transform:uppercase;
+    margin-bottom:26px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--sage);}
+  .hero h1{
+    font-size:clamp(2.6rem, 4.6vw, 4.4rem);
+    color:#f4f5f1;
+    margin-bottom:26px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg, var(--sage), var(--gold-soft) 65%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.sub{
+    font-size:17px; color:var(--ink-dim); max-width:490px; margin-bottom:38px;
+    line-height:1.7;
+  }
+  .hero-ctas{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:22px;}
+  .hero-note{font-size:12.5px; color:var(--ink-faint); letter-spacing:0.02em;}
+
+  .hero-visual{position:relative; display:flex; justify-content:center; align-items:center; height:640px;}
+  .chart-bg{
+    position:absolute; inset:0; opacity:0.55; pointer-events:none;
+  }
+  .chart-bg svg{width:100%; height:100%;}
+  .book-float{
+    position:relative; z-index:3; width:78%; max-width:400px;
+    animation:floaty 6.5s ease-in-out infinite;
+    filter:drop-shadow(0 40px 60px rgba(0,0,0,0.65)) drop-shadow(0 0 90px rgba(31,95,69,0.25));
+  }
+  @keyframes floaty{
+    0%,100%{transform:translateY(0px) rotate(-1.2deg);}
+    50%{transform:translateY(-18px) rotate(1deg);}
+  }
+  .float-tag{
+    position:absolute; z-index:4;
+    background:rgba(17,20,17,0.75);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.09);
+    padding:9px 14px; border-radius:20px;
+    font-size:12px; font-weight:500; color:var(--ink-dim);
+    display:flex; align-items:center; gap:7px;
+    animation:driftTag 7s ease-in-out infinite;
+  }
+  .float-tag .pip{width:5px; height:5px; border-radius:50%; background:var(--sage); box-shadow:0 0 8px var(--sage);}
+  .tag1{top:8%; left:-4%; animation-delay:0s;}
+  .tag2{top:22%; right:-6%; animation-delay:1.2s;}
+  .tag3{bottom:20%; left:-8%; animation-delay:2.4s;}
+  .tag4{bottom:6%; right:-2%; animation-delay:3.6s;}
+  @keyframes driftTag{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+  @media(max-width:860px){
+    .float-tag{display:none;}
+  }
+
+  @media(max-width:980px){
+    .hero-grid{grid-template-columns:1fr; text-align:left;}
+    .hero{padding-top:110px; padding-bottom:60px;}
+    .hero-visual{height:440px; order:-1; margin-bottom:20px;}
+    .hero p.sub{max-width:100%;}
+  }
+
+  /* ---------- section basics ---------- */
+  section{position:relative; z-index:2;}
+  .section-pad{padding:120px 0;}
+  @media(max-width:760px){.section-pad{padding:76px 0;} .wrap{padding:0 24px;}}
+
+  .section-head{max-width:640px; margin-bottom:64px;}
+  .section-head .eyebrow{margin-bottom:20px;}
+  .section-head h2{font-size:clamp(1.9rem, 3.2vw, 2.7rem); color:#f4f5f1;}
+  .section-head p{color:var(--ink-dim); margin-top:18px; font-size:16px; max-width:560px;}
+
+  hr.rule{border:none; border-top:1px solid var(--line); margin:0;}
+
+  /* ---------- trust strip ---------- */
+  .trust{
+    background:var(--charcoal);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .trust-top{display:grid; grid-template-columns:1fr 1.3fr; gap:60px; align-items:start; margin-bottom:60px;}
+  .trust-top h2{font-size:clamp(1.6rem,2.6vw,2.1rem); color:#f4f5f1;}
+  .trust-top p{color:var(--ink-dim); font-size:15.5px; line-height:1.75;}
+  @media(max-width:860px){.trust-top{grid-template-columns:1fr; gap:26px;}}
+
+  .stat-cards{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .stat-card{background:var(--charcoal); padding:32px 26px; transition:background 0.3s ease;}
+  .stat-card:hover{background:#171b17;}
+  .stat-card .num{font-family:'Space Grotesk'; font-size:13px; color:var(--gold-soft); letter-spacing:0.08em; margin-bottom:14px;}
+  .stat-card h4{font-size:15px; font-weight:600; color:var(--ink); margin-bottom:8px; font-family:'Inter'; letter-spacing:0;}
+  .stat-card p{font-size:13.5px; color:var(--ink-faint); line-height:1.6;}
+  @media(max-width:760px){.stat-cards{grid-template-columns:1fr 1fr;}}
+  @media(max-width:480px){.stat-cards{grid-template-columns:1fr;}}
+
+  /* ---------- chapters ---------- */
+  .chapters{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .chapter{background:var(--black); padding:38px 36px; transition:background 0.3s ease;}
+  .chapter:hover{background:#0c0f0c;}
+  .chapter .cnum{font-family:'Space Grotesk'; color:var(--ink-faint); font-size:13px; letter-spacing:0.06em; margin-bottom:16px;}
+  .chapter h3{font-size:18.5px; color:#f0f1ec; margin-bottom:12px; font-weight:600;}
+  .chapter p{font-size:14.5px; color:var(--ink-dim); line-height:1.65;}
+  .chapter ul{margin-top:14px; padding-left:0; list-style:none; display:flex; flex-wrap:wrap; gap:7px 9px;}
+  .chapter ul li{font-size:12px; color:var(--sage); border:1px solid rgba(111,174,134,0.28); padding:4px 10px; border-radius:20px;}
+  @media(max-width:760px){.chapters{grid-template-columns:1fr;}}
+
+  /* ---------- research system ---------- */
+  .research{background:linear-gradient(180deg, var(--charcoal), var(--black));}
+  .steps{position:relative; margin-top:20px;}
+  .steps-line{
+    position:absolute; left:27px; top:14px; bottom:14px; width:1px;
+    background:linear-gradient(var(--line), var(--sage), var(--line));
+  }
+  .step-row{display:grid; grid-template-columns:56px 1fr; gap:26px; padding:26px 0; position:relative;}
+  .step-num{
+    width:56px; height:56px; border-radius:50%;
+    border:1px solid var(--line); background:var(--panel);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk'; font-size:14px; color:var(--gold-soft);
+    position:relative; z-index:2;
+  }
+  .step-body h4{font-size:17px; color:#f0f1ec; margin-bottom:6px; font-weight:600; font-family:'Inter';}
+  .step-body p{font-size:14.5px; color:var(--ink-dim);}
+  @media(max-width:640px){.step-row{grid-template-columns:44px 1fr; gap:18px;} .step-num{width:44px;height:44px;font-size:12px;} .steps-line{left:21px;}}
+
+  /* ---------- bonus ---------- */
+  .bonus-panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:56px;
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:50px; align-items:center;
+    position:relative; overflow:hidden;
+  }
+  .bonus-panel::before{
+    content:''; position:absolute; top:-40%; right:-10%; width:420px; height:420px;
+    background:radial-gradient(circle, rgba(203,161,88,0.10), transparent 65%);
+    pointer-events:none;
+  }
+  .bonus-list{display:flex; flex-direction:column; gap:0;}
+  .bonus-item{
+    display:flex; align-items:center; gap:14px;
+    padding:16px 0; border-bottom:1px solid var(--line);
+    font-size:15px; color:var(--ink);
+  }
+  .bonus-item:last-child{border-bottom:none;}
+  .bonus-item .check{
+    width:20px; height:20px; border-radius:50%; flex:none;
+    background:rgba(111,174,134,0.14); color:var(--sage);
+    display:flex; align-items:center; justify-content:center; font-size:12px;
+  }
+  @media(max-width:860px){.bonus-panel{grid-template-columns:1fr; padding:40px 28px;}}
+
+  /* ---------- stories ---------- */
+  .story-cards{display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:10px;}
+  .story-card{
+    background:var(--charcoal); border:1px solid var(--line); border-radius:8px;
+    padding:40px; position:relative; overflow:hidden;
+  }
+  .story-card .spark{
+    position:absolute; right:0; top:0; width:160px; height:160px;
+    background:radial-gradient(circle, rgba(111,174,134,0.14), transparent 70%);
+  }
+  .story-card h3{font-size:22px; color:#f0f1ec; margin-bottom:6px;}
+  .story-card .tag{font-size:12px; color:var(--gold-soft); letter-spacing:0.06em; margin-bottom:20px; display:block;}
+  .story-card p{font-size:14.5px; color:var(--ink-dim); line-height:1.75; margin-bottom:14px;}
+  .story-card p:last-of-type{margin-bottom:0;}
+  .story-disclaimer{
+    margin-top:40px; padding:20px 24px; border-left:2px solid var(--gold);
+    background:rgba(203,161,88,0.05); font-size:13.5px; color:var(--ink-dim); line-height:1.7;
+  }
+  @media(max-width:860px){.story-cards{grid-template-columns:1fr;}}
+
+  /* ---------- culture section ---------- */
+  .culture{text-align:left;}
+  .venn-words{
+    display:flex; flex-wrap:wrap; gap:14px; margin:36px 0 40px;
+  }
+  .venn-words span{
+    font-family:'Space Grotesk'; font-size:14px; color:var(--ink);
+    border:1px solid var(--line); padding:12px 22px; border-radius:30px;
+    background:var(--panel);
+  }
+  .venn-words .plus{border:none; background:none; color:var(--ink-faint); padding:12px 2px;}
+  .culture-quote{
+    font-family:'Space Grotesk'; font-size:clamp(1.3rem,2vw,1.7rem);
+    color:#f0f1ec; max-width:760px; line-height:1.45; font-weight:500;
+    border-left:2px solid var(--sage); padding-left:28px;
+  }
+
+  /* ---------- who for ---------- */
+  .whofor{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  .whofor-col{padding:44px 40px; background:var(--charcoal);}
+  .whofor-col.no{background:#0d0e0d;}
+  .whofor-col h3{font-size:13px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:26px; font-family:'Inter'; font-weight:600;}
+  .whofor-col.yes h3{color:var(--sage);}
+  .whofor-col.no h3{color:var(--ink-faint);}
+  .whofor-col ul{list-style:none;}
+  .whofor-col li{display:flex; gap:12px; padding:11px 0; font-size:14.5px; color:var(--ink-dim); border-bottom:1px solid var(--line);}
+  .whofor-col li:last-child{border-bottom:none;}
+  .whofor-col.yes li::before{content:'+'; color:var(--sage); font-weight:600;}
+  .whofor-col.no li::before{content:'–'; color:var(--ink-faint); font-weight:600;}
+  @media(max-width:760px){.whofor{grid-template-columns:1fr;}}
+
+  /* ---------- showcase ---------- */
+  .showcase{
+    background:radial-gradient(ellipse 800px 500px at 50% 0%, rgba(31,95,69,0.22), transparent 65%), var(--black);
+    text-align:center;
+  }
+  .showcase .section-head{margin:0 auto 50px; text-align:center;}
+  .showcase-imgs{
+    display:flex; align-items:center; justify-content:center; gap:-20px;
+    position:relative; height:480px; margin-bottom:56px;
+  }
+  .showcase-imgs img{
+    position:absolute; border-radius:6px;
+    box-shadow:0 50px 80px -30px rgba(0,0,0,0.8);
+    transition:transform 0.5s ease;
+  }
+  .simg-main{width:270px; z-index:3; transform:rotate(0deg);}
+  .simg-left{width:220px; z-index:2; left:calc(50% - 300px); opacity:0.55; transform:rotate(-9deg) translateY(20px);}
+  .simg-right{width:220px; z-index:2; right:calc(50% - 300px); opacity:0.55; transform:rotate(9deg) translateY(20px);}
+  @media(max-width:760px){
+    .showcase-imgs{height:360px;}
+    .simg-left,.simg-right{display:none;}
+    .simg-main{width:220px;}
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:760px;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 0; cursor:pointer; font-size:16px; font-weight:500; color:var(--ink);
+    font-family:'Space Grotesk';
+  }
+  .faq-q .plus{font-size:20px; color:var(--ink-faint); transition:transform 0.3s ease; font-weight:300;}
+  .faq-item.open .faq-q .plus{transform:rotate(45deg); color:var(--gold-soft);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height 0.35s ease;}
+  .faq-a p{padding-bottom:24px; font-size:14.5px; color:var(--ink-dim); max-width:620px; line-height:1.7;}
+
+  /* ---------- final cta ---------- */
+  .final{
+    background:
+      radial-gradient(ellipse 700px 400px at 50% 30%, rgba(31,95,69,0.35), transparent 65%),
+      var(--black);
+    text-align:center; padding:140px 0;
+    border-top:1px solid var(--line);
+  }
+  .final h2{font-size:clamp(2.1rem,4vw,3.2rem); color:#f4f5f1; max-width:780px; margin:0 auto 22px;}
+  .final p{color:var(--ink-dim); font-size:16px; max-width:520px; margin:0 auto 42px;}
+  .final .hero-note{margin-top:18px;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--charcoal); border-top:1px solid var(--line); padding:70px 0 40px;}
+  .foot-top{display:flex; justify-content:space-between; gap:40px; margin-bottom:50px; flex-wrap:wrap;}
+  .foot-brand .logo{margin-bottom:14px;}
+  .foot-brand p{color:var(--ink-faint); font-size:14px; max-width:280px;}
+  .foot-links{display:flex; gap:60px; flex-wrap:wrap;}
+  .foot-col h5{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:16px; font-weight:600;}
+  .foot-col a{display:block; font-size:14px; color:var(--ink-dim); margin-bottom:11px; transition:color 0.2s ease;}
+  .foot-col a:hover{color:var(--ink);}
+  .foot-disclaimer{
+    border-top:1px solid var(--line); padding-top:32px; margin-top:10px;
+    font-size:12.5px; color:var(--ink-faint); line-height:1.8; max-width:900px;
+  }
+
+  /* ---------- fade in on scroll ---------- */
+  .fade-up{opacity:0; transform:translateY(22px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .fade-up.in{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header id="siteHeader">
+  <nav>
+    <a href="#" class="logo">MEME<span style="color:var(--sage)">COINS</span><span class="dot">.</span></a>
+    <div class="navlinks">
+      <a href="#guide">The Guide</a>
+      <a href="#inside">What's Inside</a>
+      <a href="#research">Research</a>
+      <a href="#stories">Real Stories</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="https://buy.stripe.com/5kQ00j2MwesWbV15QYbAs00" target="_blank" rel="noopener" class="nav-cta">Get the Guide</a>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="guide">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">The complete memecoin education system</div>
+      <h1>Stop chasing hype.<br><em>Start understanding the market.</em></h1>
+      <p class="sub">Learn how memecoins work, how to research projects, how to evaluate opportunities, how to protect yourself from common scams, and how to build a disciplined approach to one of crypto's most speculative markets.</p>
+      <div class="hero-ctas">
+        <a href="https://buy.stripe.com/5kQ00j2MwesWbV15QYbAs00" target="_blank" rel="noopener" class="btn-primary">Get the Guide — €29.99</a>
+        <a href="#inside" class="btn-ghost">See what's inside ↓</a>
+      </div>
+      <div class="hero-note">Instant digital access · Beginner friendly · Practical step-by-step guide</div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="chart-bg">
+        <svg viewBox="0 0 500 600" preserveAspectRatio="xMidYMid slice">
+          <polyline points="0,480 40,460 80,470 120,420 160,440 200,380 240,400 280,340 320,360 360,300 400,320 440,260 480,270 520,210"
+            fill="none" stroke="#1f5f45" stroke-width="1.5" opacity="0.5"/>
+          <polyline points="0,520 40,510 80,520 120,495 160,505 200,470 240,480 280,440 320,455 360,410 400,425 440,385 480,395 520,350"
+            fill="none" stroke="#cba158" stroke-width="1" opacity="0.3"/>
+        </svg>
+      </div>
+      <span class="float-tag tag1"><span class="pip"></span>Wallet setup</span>
+      <span class="float-tag tag2"><span class="pip"></span>Research</span>
+      <span class="float-tag tag3"><span class="pip"></span>Risk management</span>
+      <span class="float-tag tag4"><span class="pip"></span>Market analysis</span>
+      <img src="book-cover.webp" alt="The Ultimate Guide to Memecoins — book cover" class="book-float">
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST / POSITIONING ================= -->
+<section class="trust section-pad">
+  <div class="wrap">
+    <div class="trust-top fade-up">
+      <h2>Memecoins are more than internet memes.</h2>
+      <p>From community-driven tokens to some of the most discussed assets in crypto, memecoins have become a major part of the digital-asset ecosystem. Their explosive upside attracts attention — but their extreme volatility makes knowledge, research and risk management essential.</p>
+    </div>
+    <div class="stat-cards fade-up">
+      <div class="stat-card">
+        <div class="num">01</div>
+        <h4>Community</h4>
+        <p>How online communities influence memecoin markets.</p>
+      </div>
+      <div class="stat-card">
+        <div class="num">02</div>
+        <h4>Liquidity</h4>
+        <p>Why liquidity matters before entering a project.</p>
+      </div>
+      <div class="stat-card">
+        <div class="num">03</div>
+        <h4>Narrative</h4>
+        <p>How attention and culture can drive demand.</p>
+      </div>
+      <div class="stat-card">
+        <div class="num">04</div>
+        <h4>Risk</h4>
+        <p>Why protecting capital matters more than chasing hype.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT'S INSIDE ================= -->
+<section class="section-pad" id="inside">
+  <div class="wrap">
+    <div class="section-head fade-up">
+      <div class="eyebrow">What's inside the book</div>
+      <h2>Everything you need to go from confused to informed.</h2>
+    </div>
+
+    <div class="chapters fade-up">
+      <div class="chapter">
+        <div class="cnum">Chapter 01</div>
+        <h3>Memecoin fundamentals</h3>
+        <p>Understand what memecoins are, why they exist, and what makes them different from traditional cryptocurrencies.</p>
+      </div>
+      <div class="chapter">
+        <div class="cnum">Chapter 02</div>
+        <h3>Setting up your wallet</h3>
+        <p>A beginner-friendly walkthrough covering wallet creation, wallet security, funding your wallet and safely preparing for your first transaction.</p>
+      </div>
+      <div class="chapter">
+        <div class="cnum">Chapter 03</div>
+        <h3>How to research a memecoin</h3>
+        <p>Learn how to investigate a project before putting money into it.</p>
+        <ul>
+          <li>Market cap</li><li>Liquidity</li><li>Volume</li><li>Token supply</li>
+          <li>Holder distribution</li><li>Contract info</li><li>Community activity</li><li>Developer activity</li>
+        </ul>
+      </div>
+      <div class="chapter">
+        <div class="cnum">Chapter 04</div>
+        <h3>Finding opportunities</h3>
+        <p>How traders and researchers discover projects worth investigating — without presenting any coin as a guaranteed winner.</p>
+      </div>
+      <div class="chapter">
+        <div class="cnum">Chapter 05</div>
+        <h3>Spotting red flags</h3>
+        <p>Recognize potential rug pulls, honeypots, fake communities, suspicious token distribution, low liquidity, concentrated holdings and manipulative marketing.</p>
+      </div>
+      <div class="chapter">
+        <div class="cnum">Chapter 06</div>
+        <h3>Reading the market</h3>
+        <p>The basics of charts, volume, liquidity, market cycles, support and resistance, momentum and sentiment.</p>
+      </div>
+      <div class="chapter">
+        <div class="cnum">Chapter 07</div>
+        <h3>Risk management</h3>
+        <p>Position sizing, stop-loss concepts, diversification, avoiding emotional decisions, and never risking money you cannot afford to lose.</p>
+      </div>
+      <div class="chapter">
+        <div class="cnum">Chapter 08</div>
+        <h3>Building a disciplined system</h3>
+        <p>Create a repeatable research process instead of randomly buying whatever is trending.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESEARCH SYSTEM ================= -->
+<section class="research section-pad" id="research">
+  <div class="wrap">
+    <div class="section-head fade-up">
+      <div class="eyebrow">The research system</div>
+      <h2>Don't buy the meme. Research the meme.</h2>
+      <p>A repeatable six-step process the guide walks you through, project by project.</p>
+    </div>
+
+    <div class="steps fade-up">
+      <div class="steps-line"></div>
+      <div class="step-row">
+        <div class="step-num">01</div>
+        <div class="step-body"><h4>Discover</h4><p>Find projects gaining attention.</p></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">02</div>
+        <div class="step-body"><h4>Verify</h4><p>Investigate the project and its contract.</p></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">03</div>
+        <div class="step-body"><h4>Analyze</h4><p>Study liquidity, holders, volume and market structure.</p></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">04</div>
+        <div class="step-body"><h4>Assess</h4><p>Determine the risks and potential catalysts.</p></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">05</div>
+        <div class="step-body"><h4>Plan</h4><p>Define your entry, exit and maximum acceptable loss.</p></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">06</div>
+        <div class="step-body"><h4>Execute</h4><p>Only act when the setup fits your predefined rules.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BONUS ================= -->
+<section class="section-pad">
+  <div class="wrap">
+    <div class="section-head fade-up">
+      <div class="eyebrow">More than an ebook</div>
+      <h2>A complete research toolkit, not just a PDF.</h2>
+    </div>
+
+    <div class="bonus-panel fade-up">
+      <div>
+        <h3 style="font-size:1.5rem; color:#f0f1ec; margin-bottom:16px;">Your full toolkit</h3>
+        <p style="color:var(--ink-dim); font-size:14.5px; line-height:1.75;">Every checklist and worksheet referenced in the guide, ready to use from day one — so the frameworks in the book become habits, not theory.</p>
+      </div>
+      <div class="bonus-list">
+        <div class="bonus-item"><span class="check">✓</span>Complete Memecoin Guide</div>
+        <div class="bonus-item"><span class="check">✓</span>Wallet Security Checklist</div>
+        <div class="bonus-item"><span class="check">✓</span>Memecoin Research Checklist</div>
+        <div class="bonus-item"><span class="check">✓</span>Scam / Rug-Pull Checklist</div>
+        <div class="bonus-item"><span class="check">✓</span>Coin Evaluation Scorecard</div>
+        <div class="bonus-item"><span class="check">✓</span>Trading / Research Journal</div>
+        <div class="bonus-item"><span class="check">✓</span>Beginner Crypto Glossary</div>
+        <div class="bonus-item"><span class="check">✓</span>Step-by-Step Research Framework</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REAL STORIES ================= -->
+<section class="section-pad" id="stories">
+  <div class="wrap">
+    <div class="section-head fade-up">
+      <div class="eyebrow">Real memecoin stories</div>
+      <h2>When memes become markets.</h2>
+      <p>Only verified, historical examples — used here to illustrate how the market moves, not to promise it will move the same way again.</p>
+    </div>
+
+    <div class="story-cards fade-up">
+      <div class="story-card">
+        <div class="spark"></div>
+        <span class="tag">2013 — PRESENT</span>
+        <h3>Dogecoin</h3>
+        <p>Started as a joke based on the "Doge" meme, built with no roadmap or serious utility. Its community grew around humor and generosity rather than technology.</p>
+        <p>Attention around Dogecoin has spiked repeatedly over the years, often tied to celebrity mentions and broader social-media cycles, driving sharp swings in its market value in both directions.</p>
+        <p>What beginners can learn: a strong, active community can sustain a project's attention for years, but attention-driven demand can reverse just as quickly as it arrives.</p>
+      </div>
+      <div class="story-card">
+        <div class="spark"></div>
+        <span class="tag">2020 — PRESENT</span>
+        <h3>Shiba Inu</h3>
+        <p>Launched as a self-described "Dogecoin killer," Shiba Inu built an ecosystem around its token and an active, highly online community.</p>
+        <p>It saw an extraordinary rise in attention and trading activity during 2021, followed by significant drawdowns typical of highly speculative assets.</p>
+        <p>What beginners can learn: rapid growth in attention doesn't equal fundamental value, and even large, well-known projects carry substantial volatility risk.</p>
+      </div>
+    </div>
+
+    <div class="story-disclaimer fade-up">Past performance is not a guarantee of future results. These examples demonstrate how quickly markets can move — in both directions.</div>
+  </div>
+</section>
+
+<!-- ================= CULTURE ================= -->
+<section class="section-pad culture">
+  <div class="wrap">
+    <div class="section-head fade-up">
+      <div class="eyebrow">Why people pay attention</div>
+      <h2>Culture, community & capital.</h2>
+    </div>
+    <div class="venn-words fade-up">
+      <span>Internet culture</span><span class="plus">+</span>
+      <span>Community</span><span class="plus">+</span>
+      <span>Speculation</span><span class="plus">+</span>
+      <span>Crypto technology</span>
+    </div>
+    <p class="culture-quote fade-up">Whether memecoins become a permanent part of digital finance or evolve into something entirely new, understanding the market today gives you a better foundation for navigating it.</p>
+  </div>
+</section>
+
+<!-- ================= WHO FOR ================= -->
+<section class="section-pad">
+  <div class="wrap">
+    <div class="section-head fade-up">
+      <div class="eyebrow">Is this for you</div>
+      <h2>Built for people who want to learn, not gamble.</h2>
+    </div>
+    <div class="whofor fade-up">
+      <div class="whofor-col yes">
+        <h3>This guide is for you if</h3>
+        <ul>
+          <li>You're completely new to memecoins</li>
+          <li>You don't understand wallets yet</li>
+          <li>You want to learn how to research projects</li>
+          <li>You're tired of blindly following influencers</li>
+          <li>You want to understand market terminology</li>
+          <li>You want a structured research process</li>
+          <li>You want to identify risks before making decisions</li>
+        </ul>
+      </div>
+      <div class="whofor-col no">
+        <h3>This guide is not for you if</h3>
+        <ul>
+          <li>You're looking for guaranteed profits</li>
+          <li>You want a get-rich-quick scheme</li>
+          <li>You're unwilling to research</li>
+          <li>You expect every trade to win</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHOWCASE ================= -->
+<section class="section-pad showcase">
+  <div class="wrap">
+    <div class="section-head fade-up">
+      <div class="eyebrow">Your memecoin playbook</div>
+      <h2>Everything organized into one practical, beginner-friendly system.</h2>
+    </div>
+    <div class="showcase-imgs fade-up">
+      <img src="book-cover.webp" class="simg-left" alt="Book cover, left angle">
+      <img src="book-cover.webp" class="simg-main" alt="The Ultimate Guide to Memecoins, front cover">
+      <img src="book-cover.webp" class="simg-right" alt="Book cover, right angle">
+    </div>
+    <a href="https://buy.stripe.com/5kQ00j2MwesWbV15QYbAs00" target="_blank" rel="noopener" class="btn-primary fade-up">Get the Guide — €29.99</a>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section-pad" id="faq">
+  <div class="wrap">
+    <div class="section-head fade-up">
+      <div class="eyebrow">Questions</div>
+      <h2>Frequently asked questions.</h2>
+    </div>
+    <div class="faq-list fade-up" id="faqList">
+      <div class="faq-item open">
+        <div class="faq-q"><span>Is this guide suitable for beginners?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>Yes. The guide starts with the fundamentals and progressively moves into research, analysis and risk management.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Do I need previous crypto experience?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>No. The guide is designed to explain the concepts from the ground up.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Does the guide guarantee profits?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>No. Memecoins are highly speculative and volatile. The guide is educational and focuses on research, decision-making and risk management.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Is this financial advice?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>No. This is educational content, not personalized financial advice.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>How do I receive the guide?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>After completing your purchase, you'll receive immediate digital access to the ebook.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="final" id="final">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">Ready when you are</div>
+    <h2>The market moves fast. Your knowledge should move faster.</h2>
+    <p>Learn the fundamentals. Research before you buy. Understand the risks. Build your own process.</p>
+    <a href="https://buy.stripe.com/5kQ00j2MwesWbV15QYbAs00" target="_blank" rel="noopener" class="btn-primary" style="font-size:16px; padding:19px 36px;">Get the Ultimate Guide — €29.99 →</a>
+    <div class="hero-note">Instant digital access</div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="logo">MEME<span style="color:var(--sage)">COINS</span><span class="dot">.</span></div>
+        <p>The guide to understanding the market behind the memes.</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h5>Company</h5>
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="foot-col">
+          <h5>Policies</h5>
+          <a href="#">Refund Policy</a>
+          <a href="#">Risk Disclaimer</a>
+        </div>
+      </div>
+    </div>
+    <hr class="rule" style="margin-bottom:32px;">
+    <div class="foot-disclaimer">
+      Memecoins are highly speculative digital assets and can lose significant or all of their value. This ebook is provided for educational and informational purposes only and does not constitute financial, investment or trading advice. Past performance does not guarantee future results. Never invest more than you can afford to lose.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // sticky header background intensify on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.style.background = window.scrollY > 40 ? 'rgba(7,8,10,0.92)' : 'rgba(7,8,10,0.72)';
+  });
+
+  // fade-up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); observer.unobserve(e.target); } });
+  }, {threshold:0.12});
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    if(item.classList.contains('open')){ a.style.maxHeight = a.scrollHeight + 'px'; }
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = 0;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // subtle parallax on hero chart
+  const chartBg = document.querySelector('.chart-bg');
+  window.addEventListener('scroll', () => {
+    if(chartBg) chartBg.style.transform = `translateY(${window.scrollY * 0.08}px)`;
+  });
+</script>
+
+</body>
+</html>

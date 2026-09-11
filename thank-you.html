@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You — Your Guide Is Ready | Memecoins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#07080a;
+    --charcoal:#111411;
+    --panel:#161a17;
+    --emerald-deep:#0d2f24;
+    --emerald:#1f5f45;
+    --sage:#6fae86;
+    --gold:#cba158;
+    --gold-soft:#e7cd94;
+    --ink:#eceee9;
+    --ink-dim:#9aa39a;
+    --ink-faint:#5e685f;
+    --line:#242a24;
+    --radius-sm: 3px;
+    --radius-md: 8px;
+    --maxw: 720px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--black);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 24px;
+    -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(ellipse 900px 600px at 78% 12%, rgba(31,95,69,0.28), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 5% 95%, rgba(203,161,88,0.08), transparent 60%),
+      var(--black);
+  }
+  h1,h2,h3, .display{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    line-height:1.15;
+  }
+  a{color:inherit; text-decoration:none;}
+  .card{
+    max-width:var(--maxw);
+    width:100%;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius-md);
+    padding:56px 48px;
+    text-align:center;
+  }
+  .checkmark{
+    width:64px; height:64px; margin:0 auto 26px;
+    border-radius:50%;
+    background:rgba(31,95,69,0.25);
+    border:1px solid var(--emerald);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .checkmark svg{width:28px; height:28px;}
+  .eyebrow{
+    font-size:12.5px; font-weight:600; letter-spacing:0.14em;
+    color:var(--sage); text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  h1{
+    font-size:clamp(1.7rem, 4vw, 2.3rem);
+    color:#f4f5f1;
+    margin-bottom:16px;
+  }
+  p.sub{
+    font-size:16px; color:var(--ink-dim); margin-bottom:36px;
+    max-width:520px; margin-left:auto; margin-right:auto;
+  }
+  .btn-primary{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--gold-soft);
+    color:var(--black);
+    font-weight:600; font-size:15px;
+    padding:17px 32px;
+    border-radius:2px;
+    transition:transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  }
+  .btn-primary:hover{
+    background:var(--gold);
+    transform:translateY(-2px);
+    box-shadow:0 14px 30px -10px rgba(203,161,88,0.4);
+  }
+  .hero-note{
+    font-size:12.5px; color:var(--ink-faint);
+    margin-top:18px; letter-spacing:0.02em;
+  }
+  .divider{
+    height:1px; background:var(--line); margin:36px 0;
+  }
+  .help{
+    font-size:13.5px; color:var(--ink-faint);
+  }
+  .help a{color:var(--sage); border-bottom:1px solid transparent;}
+  .help a:hover{border-color:var(--sage);}
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="checkmark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#6fae86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+    <div class="eyebrow">Payment confirmed</div>
+    <h1>You're in. Your guide is ready.</h1>
+    <p class="sub">Thanks for your purchase — a receipt has been emailed to you by Stripe. Click below to download your copy of The Ultimate Guide to Memecoins now.</p>
+
+    <a href="memecoin-starter-guide.pdf" download class="btn-primary">Download Your Guide (PDF) ↓</a>
+    <div class="hero-note">Save it somewhere safe — you can re-download any time from this page.</div>
+
+    <div class="divider"></div>
+    <p class="help">Didn't get here after paying, or having trouble with the download? Email us at <a href="mailto:support@yourdomain.com">support@yourdomain.com</a> and we'll sort it out.</p>
+  </div>
+
+</body>
+</html>
